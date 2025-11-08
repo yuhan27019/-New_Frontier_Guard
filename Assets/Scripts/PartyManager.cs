@@ -1,54 +1,65 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class PartyManager : MonoBehaviour
 {
     public static PartyManager instance;
+    public PartyData partyData;
 
     public List<Image> partySlots = new List<Image>();
-    private List<Sprite> partyList = new List<Sprite>(); // ¼±ÅÃµÈ ¼ø¼­ ÀúÀå
+    
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void AddToParty(Sprite characterImg)
     {
-        if (partyList.Count >= partySlots.Count)
+        if (partyData.selectedCharacterSprites.Count >= partySlots.Count)
         {
-            Debug.Log("ÆÄÆ¼°¡ ²Ë Ã¡½À´Ï´Ù!");
+            Debug.Log("íŒŒí‹°ê°€ ê½‰ ì°¼ìŠµë‹ˆë‹¤!");
             return;
         }
 
-        partyList.Add(characterImg);
+        if (partyData.selectedCharacterSprites.Contains(characterImg))
+        {
+            Debug.Log("ì´ë¯¸ ì„ íƒëœ ìºë¦­í„°ì…ë‹ˆë‹¤!");
+            return;
+        }
+
+        partyData.AddCharacter(characterImg);
         UpdateSlots();
     }
 
     public void RemoveFromParty(Sprite characterImg)
     {
-        if (partyList.Contains(characterImg))
-        {
-            partyList.Remove(characterImg);
-            UpdateSlots();
-        }
+        partyData.RemoveCharacter(characterImg);
+        UpdateSlots();
     }
 
     private void UpdateSlots()
     {
-        // ¸ğµç ½½·Ô ÃÊ±âÈ­
         for (int i = 0; i < partySlots.Count; i++)
         {
-            if (i < partyList.Count)
+            if (i < partyData.selectedCharacterSprites.Count)
             {
-                partySlots[i].sprite = partyList[i];
+                partySlots[i].sprite = partyData.selectedCharacterSprites[i];
                 partySlots[i].color = Color.white;
             }
             else
             {
                 partySlots[i].sprite = null;
-                partySlots[i].color = new Color(1, 1, 1, 0); // ¾Èº¸ÀÌ°Ô
+                partySlots[i].color = new Color(1, 1, 1, 0);
             }
         }
     }

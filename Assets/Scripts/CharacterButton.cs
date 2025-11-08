@@ -7,22 +7,16 @@ public class CharacterButton : MonoBehaviour
     public string characterDescription;
     public string characterHPATK;
     public Sprite characterImage;
-
     private Button button;
     private bool isSelected = false;
+
     void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClickCharacter);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void OnClickCharacter()
+    public void OnClickCharacter()
     {
         if (isSelected)
         {
@@ -36,6 +30,7 @@ public class CharacterButton : MonoBehaviour
             PartyManager.instance.AddToParty(characterImage);
             isSelected = true;
         }
+
 
         CharacterINfo.instance.ShowCharacterInfo(characterName,characterHPATK, characterDescription, characterImage);
     }
