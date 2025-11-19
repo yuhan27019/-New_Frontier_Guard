@@ -31,7 +31,7 @@ public class CharacterButton : MonoBehaviour
             isSelected = true;
         }
 
-
+        //캐릭터 정보 출력
         CharacterINfo.instance.ShowCharacterInfo(characterName,characterHPATK, characterDescription, characterImage);
     }
 
