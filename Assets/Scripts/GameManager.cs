@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public string nextSceneName = "SampleScene"; // 이동할 씬 이름
+    public string nextSceneName = "GameScene"; // 이동할 씬 이름
     public string behindSceneName = "StageScene";
     public PartyData partyData;
 
