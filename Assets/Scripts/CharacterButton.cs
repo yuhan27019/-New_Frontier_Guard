@@ -3,36 +3,46 @@ using UnityEngine.UI;
 
 public class CharacterButton : MonoBehaviour
 {
-    public string characterName;
-    public string characterDescription;
-    public string characterHPATK;
-    public Sprite characterImage;
+    [Header("데이터 연결")]
+    public PartyData partyData; // Merged Party Data 파일 연결
+    public int unitIndex;       // 도감 번호 (0, 1, 2...)
     private Button button;
-    private bool isSelected = false;
+    private PartyData.UnitInfo myInfo;
 
     void Start()
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClickCharacter);
+
+        // 데이터 로드
+        if (partyData != null && partyData.allUnits.Count > unitIndex)
+        {
+            myInfo = partyData.allUnits[unitIndex];
+
+            // 버튼 이미지 유닛 얼굴로 변경
+            if (myInfo.unitImage != null)
+                GetComponent<Image>().sprite = myInfo.unitImage;
+        }
     }
 
     public void OnClickCharacter()
     {
-        if (isSelected)
+        if (myInfo == null) return;
+
+        // 1. [왼쪽 화면] 정보창에 내 정보 띄우기
+        CharacterINfo.instance.ShowCharacterInfo(myInfo);
+
+        // 2. [오른쪽 아래] 파티 슬롯에 넣거나 빼기
+        // 내 정보가 현재 파티 리스트에 들어있는지 확인
+        if (partyData.myParty.Contains(myInfo))
         {
-            // 이미 선택된 상태라면 파티에서 제거
-            PartyManager.instance.RemoveFromParty(characterImage);
-            isSelected = false;
+            // 이미 있으면 -> 파티에서 뺌
+            PartyManager.instance.RemoveFromParty(myInfo);
         }
         else
         {
-            // 선택되지 않았다면 파티 추가
-            PartyManager.instance.AddToParty(characterImage);
-            isSelected = true;
+            // 없으면 -> 파티에 추가 (꽉 찼는지는 PartyManager가 알아서 거절함)
+            PartyManager.instance.AddToParty(myInfo);
         }
-
-        //캐릭터 정보 출력
-        CharacterINfo.instance.ShowCharacterInfo(characterName,characterHPATK, characterDescription, characterImage);
     }
-
 }

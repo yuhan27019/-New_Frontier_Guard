@@ -133,7 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82838960abe51c42a2458848afe23e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: "\uBCF4\uAE09\uBCD1"
-  characterDescription: 
-  characterHPATK: "\uCCB4\uB825: 50 \uACF5\uACA9\uB825 : 0"
-  characterImage: {fileID: 21300000, guid: b52916726d3ef9b44ba52bac91a18bbf, type: 3}
+  partyData: {fileID: 11400000, guid: 1323770c85e88384987fda32e36d38af, type: 2}
+  unitIndex: 0

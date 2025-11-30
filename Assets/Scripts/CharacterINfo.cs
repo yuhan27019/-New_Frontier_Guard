@@ -3,7 +3,6 @@ using UnityEngine;
 public class CharacterINfo : MonoBehaviour
 {
     public static CharacterINfo instance;
-
     public CharacterInfoUI infoUI;
 
     void Awake()
@@ -11,8 +10,9 @@ public class CharacterINfo : MonoBehaviour
         instance = this;
     }
 
-    public void ShowCharacterInfo(string name,string Info, string desc, Sprite img)
+    // 매개변수 타입 변경: UnitData -> PartyData.UnitInfo
+    public void ShowCharacterInfo(PartyData.UnitInfo info)
     {
-        infoUI.ShowInfo(name, Info, desc, img);
+        infoUI.ShowInfo(info);
     }
 }

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (partyData.selectedCharacterSprites.Count == 0)
+        if (partyData.myParty.Count == 0)
         {
             Debug.LogWarning("파티가 비어있습니다! 시작할 수 없습니다.");
             return;

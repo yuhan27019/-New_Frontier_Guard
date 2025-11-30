@@ -28,14 +28,16 @@ public class PartyLoader : MonoBehaviour
         }
 
         // PartyData에서 Sprite 불러와서 UI에 표시
-        for (int i = 0; i < partyData.selectedCharacterSprites.Count && i < partySlots.Length; i++)
+        for (int i = 0; i < partyData.myParty.Count && i < partySlots.Length; i++)
         {
-            var sprite = partyData.selectedCharacterSprites[i];
-            if (sprite != null)
+            PartyData.UnitInfo unitInfo = partyData.myParty[i];
+
+            if (unitInfo != null)
             {
-                partySlots[i].sprite = sprite;
-                partySlots[i].color = Color.white;
-                Debug.Log($"파티 슬롯 {i + 1} : {sprite.name}");
+                partySlots[i].sprite = unitInfo.unitImage;
+                partySlots[i].color = Color.white; 
+
+                Debug.Log($"파티 슬롯 {i + 1} 로드 완료 : {unitInfo.unitName}");
             }
         }
     }
