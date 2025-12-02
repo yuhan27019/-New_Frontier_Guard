@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public string nextSceneName = "GameScene"; // 이동할 씬 이름
-    public string behindSceneName = "StageScene";
+    public string nextSceneName = "WorldMap"; // 이동할 씬 이름
+    public string behindSceneName = "TitleScene";
     public PartyData partyData;
 
     public void StartGame()
